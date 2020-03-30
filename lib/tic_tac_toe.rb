@@ -1,5 +1,3 @@
-require 'pry'
-
 class TicTacToe
   
   attr_accessor :board
@@ -32,19 +30,17 @@ def input_to_index(input)
   # binding.pry
 end
   
-  def move(index, token = "x")
+  def move( index, token = "x")
     board[index] = token
     
 end
   
   def position_taken?(index)
-    board[index] != ""  
-    # binding.pry
+    board[index] != " "
+    
 end
-
-
-def valid_move(index) 
-  index.between?(0,8) && !position_taken?(index)
+def valid_move(board, index) 
+  index.between?(0,8) && !position_taken?(board,index)
   
 end
 
@@ -60,8 +56,17 @@ def turn(board)
       puts "That move was invalid, try again."
       turn(board)
     end
-    occupied_spaces
+    
+    def turn_count(board)
+      
+      occupied_spaces = 0
+      counter = 0 
+      while couter < board.size 
+      position_taken?(board,index)
+      occupied_spaces += 1
+    end
+        counter += 1 
+    end
+  occupied_spaces
   end
-  
-  
 end
