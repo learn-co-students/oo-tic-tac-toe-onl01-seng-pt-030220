@@ -2,9 +2,9 @@ class TicTacToe
   
   attr_accessor :board
   
-  def initialize
+def initialize
     @board = board || Array.new(9, " ")
-  end
+end
   
   WIN_COMBINATIONS = [
 [0,1,2],
@@ -30,43 +30,101 @@ def input_to_index(input)
   # binding.pry
 end
   
-  def move( index, token = "x")
+def move( index, token = "x")
     board[index] = token
     
 end
   
-  def position_taken?(index)
+
+def position_taken?(index)
     board[index] != " "
     
 end
-def valid_move(board, index) 
-  index.between?(0,8) && !position_taken?(board,index)
+
+
+def valid_move?(index) 
+  index.between?(0,8) && !position_taken?(index)
   
 end
 
-def turn(board)
+def turn
   puts "Where would you like to go?"
   input = gets.strip
   index = input_to_index(input)
   
-  if valid_move?(board, index)
-    move(board, index, "X")
-      display_board(board)
+  if valid_move?(index)
+    move(index, current_player)
+      display_board
     else
-      puts "That move was invalid, try again."
-      turn(board)
-    end
-    
-    def turn_count(board)
-      
-      occupied_spaces = 0
-      counter = 0 
-      while couter < board.size 
-      position_taken?(board,index)
-      occupied_spaces += 1
-    end
-        counter += 1 
-    end
-  occupied_spaces
-  end
+      puts "That was invalid, try again."
+      turn
 end
+end
+    
+def turn_count
+  board.count {|cell| cell !=" "}
+end
+
+def current_player
+  if turn_count.odd?
+    "O"
+  else
+    "X"
+end
+end
+
+def won?
+  winning_combo = nil 
+ 
+ WIN_COMBINATIONS.each do |combo|
+   position_1 = combo[0]
+   position_2 = combo[1]
+   position_3 = combo[2]
+   
+   if board[position_1] == "X" && board[position_2] == "X" && board[position_3] == "X"
+     
+     winning_combo = combo
+     
+     elsif board[position_1] == "O" && board[position_2] == "O" && board[position_3] == "O"
+     
+     winning_combo = combo
+end 
+end
+winning_combo
+end
+
+def full?
+  turn_count == 9
+end
+
+def draw?
+  full? && !won?
+end
+
+def over?
+    won? || draw?
+end
+
+def winner
+   if  winning_combo = won?
+    board[winning_combo.first]
+end
+end
+
+
+def play
+  until over? 
+  turn
+end
+if won? 
+  victor = winner 
+  puts "Congratulations #{winner}!"  
+elsif draw?
+    puts "Cat's Game!"
+
+  
+end
+end
+
+end
+
