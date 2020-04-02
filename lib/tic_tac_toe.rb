@@ -48,7 +48,7 @@ class TicTacToe
     end
 
     def turn
-      puts "your turn"
+      puts "Pick an empty slot"
       text = gets.chomp
       index = input_to_index(text)
       if valid_move?(index)
@@ -97,3 +97,7 @@ class TicTacToe
     end
 
   end # END OF CLASS
+
+  # puts "Welcome to Tic Tac Toe!"
+  # game = TicTacToe.new
+  # game.play
