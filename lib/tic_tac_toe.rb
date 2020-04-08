@@ -7,7 +7,7 @@ class TicTacToe
 
     [0,3,6], # Left column
     [1,4,7], # Middle column
-    [2,5,8], # Right column
+    [2,5,8], 
 
     [0,4,8], # Diagonal
     [2,4,6]
